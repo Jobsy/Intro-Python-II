@@ -1,5 +1,6 @@
 # Write a class to hold player information, e.g. what room they are in
 # currently.
+from room import Room
 
 
 class Player:
@@ -8,19 +9,11 @@ class Player:
         self.name = name
         self.current_room = current_room
         self.move = move
+        # print(self.current_room)
 
     def __str__(self):
         output = ""
         output += self.name + "\n"
-        output += self.current_room + "\n"
-        for m in self.move:
-            output += f"{m}\n"
-
-        output += f"Exit"
+        output += self.current_room.description + ">>>" + "\n"
 
         return output
-
-
-j = Player("Jobsy", "Room 1", ["n", "e", "s", "w"])
-
-print(j)
