@@ -38,15 +38,25 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-j = Player("Jobsy", "Room 1", ["n", "e", "s", "w"])
-print(j.move)
+# j = Player("Jobsy", "Room 1", ["n", "e", "s", "w"])
+# print(j.move)
+# print(j)
+
+# j = Player(
+#     "Jobsy",
+#     Room("outside", str(room["outside"])),
+#     ["n", "e", "s", "w"]
+# )
+j = Player(
+    "Jobsy",
+    room["outside"],
+    ["n", "e", "s", "w"]
+)
 print(j)
 
-# j_room = Room("outside", str(room["outside"]))
+# j_room = Room("outside", str(room["outside"]), )
 # print(j_room)
 
-# for k, v in room.items():
-#     print(k)
 
 # Write a loop that:
 #
@@ -58,6 +68,8 @@ print(j)
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+
 selection = ""
 
 # filter function
@@ -65,7 +77,7 @@ selection = ""
 
 def filter_moves(user_selection):
     if(user_selection in j.move):
-        print(user_selection)
+        # print(user_selection)
         return True
     else:
         print(user_selection)
@@ -74,11 +86,42 @@ def filter_moves(user_selection):
 
 
 while selection != "q":
+
     selection = str(input("Make a move: "))
     # print(selection)
-    for selection2 in filter(filter_moves, selection):
+    current_room = j.current_room
+    for move in filter(filter_moves, selection):
         # print(selection2 + "ppp")
-        if selection == selection2:
-            print("Yeah!!! Make another move or quit")
+        # if selection == selection2:
+        #     print(selection)
+        #     if selection == "n":
+        #         # print(room['outside'].n_to)
+        #         # n_to = "room['outside'].n_to"
+
+        #         print("Yeah!!! Make another move or quit")
+        if move == "n":
+            if current_room.n_to is not None:
+                j.current_room = current_room.n_to
+                print(current_room)
+            else:
+                print("You hit a dead end!  Try again.")
+        elif move == "s":
+            if current_room.s_to is not None:
+                j.current_room = current_room.s_to
+                print(current_room)
+            else:
+                print("You hit a dead end!  Try again.")
+        elif move == "e":
+            if current_room.e_to is not None:
+                j.current_room = current_room.e_to
+                print(current_room)
+            else:
+                print("You hit a dead end!  Try again.")
+        elif move == "w":
+            if current_room.w_to is not None:
+                j.current_room = current_room.w_to
+                print(current_room)
+            else:
+                print("You hit a dead end!  Try again.")
     if selection == "q":
         print("You Quit")
