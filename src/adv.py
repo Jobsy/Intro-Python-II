@@ -39,10 +39,11 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 j = Player("Jobsy", "Room 1", ["n", "e", "s", "w"])
+print(j.move)
 print(j)
 
-j_room = Room("outside", str(room["outside"]))
-print(j_room)
+# j_room = Room("outside", str(room["outside"]))
+# print(j_room)
 
 # for k, v in room.items():
 #     print(k)
@@ -57,3 +58,27 @@ print(j_room)
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+selection = ""
+
+# filter function
+
+
+def filter_moves(user_selection):
+    if(user_selection in j.move):
+        print(user_selection)
+        return True
+    else:
+        print(user_selection)
+        print("Wrong move! Try again")
+        return False
+
+
+while selection != "q":
+    selection = str(input("Make a move: "))
+    # print(selection)
+    for selection2 in filter(filter_moves, selection):
+        # print(selection2 + "ppp")
+        if selection == selection2:
+            print("Yeah!!! Make another move or quit")
+    if selection == "q":
+        print("You Quit")
